@@ -9,7 +9,7 @@ type AppContextValue = {
   openFieldsModal: (todo?: ToDo) => void;
   filter: ToDoFilter;
   setFilter: (filter: ToDoFilter) => void;
-}
+};
 
 export const AppContext = React.createContext({} as AppContextValue);
 
@@ -18,7 +18,7 @@ export const AppProvider = ({
 }: React.PropsWithChildren<AppContextProps>) => {
   const [apiKey, setApiKey] = useState("");
   const [fieldsmodalData, setFieldsmodalData] = useState<ToDo | newToDo>();
-  const [filter, setFilter] = useState({prefix: "", tags: [] as string[]});
+  const [filter, setFilter] = useState({ prefix: "", tags: [] as string[] });
 
   const openFieldsModal = (todo?: ToDo) => {
     setFieldsmodalData(todo || { fields: { Tags: [], Text: "" } });
@@ -31,19 +31,25 @@ export const AppProvider = ({
   useEffect(() => {
     api.setApiKey(apiKey);
     // TODO: fetch Todos
-  }, [apiKey])
+  }, [apiKey]);
 
   const state: AppContextValue = {
     apiKey,
     setApiKey,
     openFieldsModal,
-    filter, setFilter
+    filter,
+    setFilter,
   };
 
   return (
     <AppContext.Provider value={state}>
       {children}
-      {fieldsmodalData && <FieldsModal fieldsmodalData={fieldsmodalData} onClose={closeFieldsModal} />}
+      {fieldsmodalData && (
+        <FieldsModal
+          fieldsmodalData={fieldsmodalData}
+          onClose={closeFieldsModal}
+        />
+      )}
     </AppContext.Provider>
   );
 };

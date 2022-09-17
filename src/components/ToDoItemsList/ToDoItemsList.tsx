@@ -4,19 +4,21 @@ import s from "./ToDoItemsList.module.scss";
 import { useContext } from "react";
 import { AppContext } from "context/AppContext";
 import { api } from "api/ToDoApi";
-import { todos } from "utils/mockData";
+
 import { SearchField } from "../SearchField";
 import { TagFilter } from "../TagFilter";
 import { AddButton } from "../AddButton";
+import { useTodos } from "hooks/useTodos";
 
 
 export const ToDoItemsList = ({}) => {
-  const queryClient = useQueryClient();
+  // const queryClient = useQueryClient();
   const { apiKey } = useContext(AppContext);
   // const query = useQuery('todos', api.fetchTodos)
 
   // console.log(query)
   // const todos = query.data?.records || []
+  const todos = useTodos();
 
   if(!apiKey) {
     return <span>No api key</span>

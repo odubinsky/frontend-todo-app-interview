@@ -29,7 +29,7 @@ class ToDoAPI {
   }
 
   createTodo(params: ToDoCreatePayload) {
-    return axios.post(API_BASE_PATH, { records: [params]},{ headers: this.getHeaders() })
+    return axios.post(API_BASE_PATH, { records: [params]}, { headers: this.getHeaders() })
   }
 
   updateTodo(params: ToDoUpdatePayload) {

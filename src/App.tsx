@@ -45,7 +45,6 @@ export const App = ({}) => {
   return (
     <div className={st.app}>
       <AppHeader />
-      <ApiKeyInput />
       <ToDoItemsList />
     </div>
   );

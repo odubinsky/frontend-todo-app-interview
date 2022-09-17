@@ -1,17 +1,16 @@
-
-import { AppContext } from 'context/AppContext';
-import React, {useContext, useEffect, useState} from 'react';
-import { api } from '../../api/ToDoApi';
-import s from './ApiKeyInput.module.scss';
+import { AppContext } from "context/AppContext";
+import React, { useContext, useEffect, useState } from "react";
+import { api } from "../../api/ToDoApi";
+import s from "./ApiKeyInput.module.scss";
 
 const apiKeyLocalStorageKey = "apiKey";
 
-export const ApiKeyInput = ({}) => {  
+export const ApiKeyInput = ({}) => {
   const { apiKey, setApiKey } = useContext(AppContext);
 
   useEffect(() => {
     const apiKeyFromLocalStorage = localStorage.getItem(apiKeyLocalStorageKey);
-    
+
     if (apiKeyFromLocalStorage) {
       localStorage.setItem(apiKeyLocalStorageKey, apiKeyFromLocalStorage);
       setApiKey(apiKeyFromLocalStorage);
@@ -36,24 +35,22 @@ export const ApiKeyInput = ({}) => {
   //       .catch((e) => console.error(e));
   //   }
   // }, [apiKey]);
-  
-  return <div className={s.apiKeyInputContainer}>
-      <span>Enter API key: </span>
+
+  return (
+    <div className={s.apiKeyInputContainer}>
+      <span className={s.apiKeyLabel}>Enter API key: </span>
       <input
         className={s.apiKeyInput}
         type="password"
         value={apiKey}
         onChange={(textEvent) => {
-          localStorage.setItem(
-            apiKeyLocalStorageKey,
-            textEvent.target.value
-          );
+          localStorage.setItem(apiKeyLocalStorageKey, textEvent.target.value);
           setApiKey(textEvent.target.value);
         }}
       />
       {/* <button onClick={() => {
         api.setApiKey(apiKey);
       }}>submit</button> */}
-
     </div>
-}
+  );
+};

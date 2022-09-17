@@ -1,0 +1,19 @@
+.tag {
+  font-size: 12px;
+  border: #20455e 1px solid;
+  padding: 3px;
+  border-radius: 4px;
+  // background-color: rgb(122, 169, 171);
+  cursor: pointer;
+  color: #20455e;
+  &:hover {
+    color: #338fff;
+    border-color: #338fff;
+  }
+}
+
+.tagsList {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}

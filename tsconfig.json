@@ -1,0 +1,54 @@
+{
+  "compilerOptions": {
+    "noImplicitAny": false,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "target": "es2015",
+    "jsx": "react-jsx",
+    "types": [
+      "react",
+      "jest",
+      "@testing-library/jest-dom"
+    ],
+    "module": "esNext",
+    "moduleResolution": "node",
+    "experimentalDecorators": true,
+    "declaration": false,
+    "removeComments": true,
+    "noImplicitReturns": true,
+    "noUnusedLocals": false,
+    "strict": true,
+    "outDir": "dist",
+    "baseUrl": "src",
+    "typeRoots": [
+      "node_modules/@types",
+      "./types"
+    ],
+    "strictNullChecks": true,
+    "allowJs": true,
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "noEmit": true,
+    "noFallthroughCasesInSwitch": true,
+    "isolatedModules": true
+  },
+  "plugins": [
+    {
+      "name": "typescript-plugin-css-modules"
+    }
+  ],
+  "exclude": [
+    "dist",
+    "node_modules"
+  ],
+  "include": [
+    "src"
+  ]
+}

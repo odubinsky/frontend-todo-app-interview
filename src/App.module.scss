@@ -1,0 +1,22 @@
+.app {
+  background-color: #f7f7f7;
+  height: 100vh;
+  padding-top: 4vh;
+  padding-left: 15vw;
+  padding-right: 15vw;
+  display: flex;
+  flex-direction: column;
+}
+
+
+.app-todo-item {
+  text-align: left;
+  align-items: center;
+  background: #fff;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.15);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 15px 10px;
+}

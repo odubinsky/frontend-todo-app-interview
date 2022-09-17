@@ -1,0 +1,12 @@
+
+.todoList {
+  display: flex;
+  flex-wrap: wrap;
+  >li {
+    margin: 10px;
+  }
+}
+
+.todoListContainer {
+  // background-color: #a89d9d;
+}

@@ -20,7 +20,7 @@ export const useGetTodos = () => {
       const { Text, Tags } = todo.fields;
       const textMatch = Text.toLowerCase().startsWith(filter.prefix.toLowerCase());
       const tagsMatch = Tags.some((tag) => filter.tags.includes(tag));
-      return textMatch || tagsMatch;
+      return textMatch && tagsMatch;
     });
   };
   

@@ -1,12 +1,12 @@
-import { AppContext } from "context/AppContext";
-import React, { useContext, useEffect, useState } from "react";
+import { useAppContext } from "context/AppContext";
+import React, { useEffect, useState } from "react";
 import { api } from "../../api/ToDoApi";
 import s from "./ApiKeyInput.module.scss";
 
 const apiKeyLocalStorageKey = "apiKey";
 
 export const ApiKeyInput = ({}) => {
-  const { apiKey, setApiKey } = useContext(AppContext);
+  const { apiKey, setApiKey } = useAppContext();
 
   useEffect(() => {
     const apiKeyFromLocalStorage = localStorage.getItem(apiKeyLocalStorageKey);

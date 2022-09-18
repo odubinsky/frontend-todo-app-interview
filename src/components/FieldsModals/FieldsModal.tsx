@@ -2,14 +2,14 @@ import { createPortal } from "react-dom";
 import { useState } from "react";
 import s from "./FieldsModal.module.scss";
 import { TagsList } from "components/Tag/TagsList";
-import { useMutation, useQueryClient } from "react-query";
-import { api } from "api/ToDoApi";
-import { Status } from "utils/consts";
+import { useCreateTodo, useUpdateTodo } from "hooks/todosQuery";
+import cx from 'classnames';
 
 export const FieldsModal = ({
   fieldsmodalData,
   onClose,
-}: {
+}: 
+{
   fieldsmodalData: ToDo | newToDo;
   onClose: () => void;
 }) => {
@@ -18,26 +18,23 @@ export const FieldsModal = ({
   const [tagInput, setTagInput] = useState("");
 
   const isNew = !(fieldsmodalData as ToDo).id;
-
-  const queryClient = useQueryClient();
-
-  const { mutate } = useMutation(api.createTodo, {
-    onSuccess: () => {
-      queryClient.invalidateQueries("todos");
-    },
-  });
+  const createMutation = useCreateTodo();
+  const updateMutation = useUpdateTodo();
 
   return createPortal(
     <div className={s.modalBackground} onClick={onClose}>
-      <div className={s.modal} onClick={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-      }}>
+      <div
+        className={s.modal}
+        onClick={(e) => {
+          e.preventDefault();
+          e.stopPropagation();
+        }}
+      >
         <div className={s.modalHeader}>
-          <h3 className={s.modalTitle}>
+          <h1 className={s.modalTitle}>
             {isNew ? "Add New Task" : "Edit Task"}
-          </h3>
-          <button onClick={onClose} className={s.closeButton}>
+          </h1>
+          <button onClick={onClose} className={cx(s.closeButton, s.button)}>
             X
           </button>
         </div>
@@ -64,7 +61,7 @@ export const FieldsModal = ({
                 setTags([...tags, tagInput]);
                 setTagInput("");
               }}
-              className={s.addButton}
+              className={cx(s.addTagButton, s.button)}
             >
               Add Tag
             </button>
@@ -79,14 +76,20 @@ export const FieldsModal = ({
         <div className={s.modalFooter}>
           <button
             onClick={() => {
-              mutate({
-                Tags: tags,
-                Text: text,
-                Status: Status.Todo,
-              });
+              const payload = {
+                id: (fieldsmodalData as ToDo).id,
+                fields: {
+                  Text: text,
+                  Tags: tags,
+                  Status: fieldsmodalData.fields.Status,
+                },
+              };
+              isNew
+                ? createMutation.mutate(payload)
+                : updateMutation.mutate(payload);
               onClose();
             }}
-            className={s.button}
+            className={cx(s.saveButton, s.button)}
           >
             {isNew ? "Add Task" : "Save"}
           </button>

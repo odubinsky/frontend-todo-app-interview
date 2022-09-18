@@ -5,15 +5,18 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { AppProvider } from "context/AppContext";
 import { QueryClientProvider, QueryClient } from "react-query";
+import { ToastProvider } from "context/ToastContext";
 
 const queryClient = new QueryClient();
 
 ReactDOM.render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      <AppProvider>
-        <App />
-      </AppProvider>
+      <ToastProvider>
+        <AppProvider>
+          <App />
+        </AppProvider>
+      </ToastProvider>
     </QueryClientProvider>
   </React.StrictMode>,
   document.getElementById("root")

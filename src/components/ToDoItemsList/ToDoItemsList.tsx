@@ -1,41 +1,40 @@
-import { ToDoItem } from "../ToDoItem";
-import { useQuery, useQueryClient } from "react-query";
 import s from "./ToDoItemsList.module.scss";
-import { useContext } from "react";
-import { AppContext } from "context/AppContext";
+import { AppContext, useAppContext } from "context/AppContext";
 import { api } from "api/ToDoApi";
-
+import { ToDoItem } from "components/ToDoItem";
 import { SearchField } from "../SearchField";
 import { TagFilter } from "../TagFilter";
 import { AddButton } from "../AddButton";
-import { useTodos } from "hooks/useTodos";
+import {  useGetTodos } from "hooks/todosQuery";
 
 
 export const ToDoItemsList = ({}) => {
-  // const queryClient = useQueryClient();
-  const { apiKey } = useContext(AppContext);
-  // const query = useQuery('todos', api.fetchTodos)
+  const { apiKey } = useAppContext();
 
-  // console.log(query)
-  // const todos = query.data?.records || []
-  const todos = useTodos();
+  const { query, todos} = useGetTodos()
 
+  
   if(!apiKey) {
     return <span>No api key</span>
   }
 
+  if(query.isError) {
+    return <span>Error, try again later</span>
+  }
+
+  
   return (
     <div className={s.todoListContainer}>
       <div className={s.header}>
         <SearchField />
         <TagFilter />
       </div>
-      <ul className={s.todoList}>
-          {todos.map((todo: ToDo) => (
+      {query.isLoading ? <div>Loading...</div> : <ul className={s.todoList}>
+          {todos && todos.map((todo: ToDo) => (
             <ToDoItem todo={todo} />
           ))}
           <AddButton />
-      </ul>
+      </ul>}
     </div>
   );
 };

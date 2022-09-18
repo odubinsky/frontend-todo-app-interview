@@ -15,14 +15,16 @@
   left: 50%;
   transform: translate(-50%, -50%);
   max-width: 40%;
+  min-width: 20%;
   // height: 50%;
-  background-color: #fff;
+  background-color: #f7f7f7;
   z-index: 101;
   border-radius: 8px;
   padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+
 }
 
 .modalHeader {
@@ -48,12 +50,8 @@
 }
 
 .closeButton {
-  cursor: pointer;
   font-size: 14px;
-  color: #20455e;
-  &:hover {
-    color: #338fff;
-  }
+  padding: 8px 12px;
 }
 
 .addButton {
@@ -61,11 +59,47 @@
 }
 
 .label {
-  font-size: 14px;
+  font-size: 18px;
   padding-bottom: 4px;
 }
 
+.input {
+  padding: 8px 9px;
+}
 
 .modalFooter {
   margin-top: 24px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.saveButton {
+  padding: 9px 15px;
+  font-size: 16px;
+}
+
+.button {
+  background-color: #000000;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  &:hover {
+    background-color: #f7f7f7;
+    border: 1px solid black;
+    color: black;
+  }
+  cursor: pointer;
+  border-radius: 8px;
+  margin-bottom: 14px;
+  border: 1px solid #fff;
+  padding: 10px 20px;
+  position: relative;
+}
+
+.addTagButton {
+  margin-left: 10px;  
+  font-size: 16px;
+  padding: 9px 15px;
 }

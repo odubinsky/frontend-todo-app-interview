@@ -1,20 +1,24 @@
 import s from "./ToDoItem.module.scss";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { ReactComponent as CompletedIcon } from "../../assets/completed.svg";
 import { ReactComponent as DeleteIcon } from "../../assets/trash.svg";
 import { ReactComponent as EditIcon } from "../../assets/edit.svg";
 import cx from "classnames";
-import { AppContext } from "context/AppContext";
+import { useAppContext } from "context/AppContext";
 import { TagsList } from "components/Tag/TagsList";
+import { useDeleteTodos, useUpdateTodo } from "hooks/todosQuery";
+import { Status as StatusOptions } from "../../utils/consts";
 
 export const ToDoItem = ({ todo }: { todo: ToDo }) => {
   const {
     id,
     fields: { Status, Tags, Text },
   } = todo;
-  const [isCompleted, setIsCompleted] = useState(Status === "Completed");
-  const { openFieldsModal, filter, setFilter } = useContext(AppContext);
-  // const isCompleted = status === 'Completed'
+  const [isCompleted, setIsCompleted] = useState(Status === StatusOptions.Done);
+  const { openFieldsModal, filter, setFilter } = useAppContext();
+  const deleteMutation = useDeleteTodos();
+  const updateTodoMutation = useUpdateTodo();
+  const currentStatus = isCompleted ? StatusOptions.Done : StatusOptions.Todo;
 
   return (
     <li key={id} className={cx(s.todoItem, { [s.completed]: isCompleted })}>
@@ -32,13 +36,16 @@ export const ToDoItem = ({ todo }: { todo: ToDo }) => {
       <div className={s.actions}>
         <EditIcon
           onClick={() => {
-            openFieldsModal(todo);
+            openFieldsModal({
+              ...todo,
+              fields: { ...todo.fields, Status: currentStatus },
+            });
           }}
           className={s.edit}
         />
         <DeleteIcon
           onClick={() => {
-            openFieldsModal();
+            deleteMutation.mutate({ id });
           }}
           className={s.delete}
         />
@@ -46,6 +53,15 @@ export const ToDoItem = ({ todo }: { todo: ToDo }) => {
       <CompletedIcon
         onClick={() => {
           setIsCompleted(!isCompleted);
+          updateTodoMutation.mutate(
+            {
+              id,
+              fields: {
+                Status: isCompleted ? StatusOptions.Todo : StatusOptions.Done,
+              },
+            },
+            { onError: () => setIsCompleted(isCompleted) }
+          );
         }}
         className={cx(s.status, { [s.completed]: isCompleted })}
       />

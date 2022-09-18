@@ -1,10 +1,9 @@
 
-import { AppContext } from 'context/AppContext';
-import { useContext } from 'react';
+import { AppContext, useAppContext } from 'context/AppContext';
 import s from './AddButton.module.scss'
 
 export const AddButton = ({}) => {
-  const { openFieldsModal } = useContext(AppContext);
+  const { openFieldsModal } = useAppContext();
   
 
   return (

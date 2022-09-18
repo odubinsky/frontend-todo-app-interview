@@ -2,7 +2,7 @@
 type ToDoFields = {
   Text: string;
   Status: string;
-  Tags: string[];
+  Tags: string[] | [];
 };
 
 interface ToDo {
@@ -10,9 +10,9 @@ interface ToDo {
   fields: ToDoFields;
   createdTime: string;
 }
-type newToDo = { fields: { Tags: []; Text: "" } };
+type newToDo = { fields: { Tags: []; Text: ""; Status: "Todo" } };
 
-type ToDoCreatePayload = ToDoFields;
+type ToDoCreatePayload = Pick<ToDo, "fields">;
 
 type ToDoDeletePayload = Pick<ToDo, "id">;
 
@@ -22,7 +22,9 @@ type ToDoUpdatePayload = {
 };
 
 type ToDosFetchResponse = {
-  records: ToDo[];
+  data: {
+    records: ToDo[];
+  };
 };
 
 type ToDoCreateResponse = {

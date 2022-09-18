@@ -1,12 +1,8 @@
 import { TagsList } from "components/Tag/TagsList";
-import { AppContext } from "context/AppContext";
-import { useContext } from "react";
-
-
-
+import { useAppContext } from "context/AppContext";
 
 export const TagFilter = ({}) => {
-  const {filter, setFilter} = useContext(AppContext)
+  const {filter, setFilter} = useAppContext();
 
   return (
     <div>

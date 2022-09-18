@@ -1,5 +1,6 @@
-import { FieldsModal } from "components/FieldsModal";
+import { FieldsModal } from "components/FieldsModals";
 import React, { useContext, useEffect, useState } from "react";
+import { Status } from "utils/consts";
 import { api } from "../api/ToDoApi";
 type AppContextProps = {};
 
@@ -21,7 +22,7 @@ export const AppProvider = ({
   const [filter, setFilter] = useState({ prefix: "", tags: [] as string[] });
 
   const openFieldsModal = (todo?: ToDo) => {
-    setFieldsmodalData(todo || { fields: { Tags: [], Text: "" } });
+    setFieldsmodalData(todo || { fields: { Tags: [], Text: "", Status: 'Todo' } });
   };
 
   const closeFieldsModal = () => {

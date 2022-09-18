@@ -1,7 +1,7 @@
 
 import axios from 'axios';
 
-export const API_BASE_PATH = 'http://zyh0ypgh08.execute-api.eu-west-1.amazonaws.com/prod/todos'
+export const API_BASE_PATH = 'https://zyh0ypgh08.execute-api.eu-west-1.amazonaws.com/prod/todos'
 
 
 

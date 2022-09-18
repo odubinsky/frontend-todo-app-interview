@@ -1,5 +1,6 @@
 import { FieldsModal } from "components/FieldsModals";
 import React, { useContext, useEffect, useState } from "react";
+import { useQueryClient } from "react-query";
 import { Status } from "utils/consts";
 import { api } from "../api/ToDoApi";
 type AppContextProps = {};
@@ -20,6 +21,7 @@ export const AppProvider = ({
   const [apiKey, setApiKey] = useState("");
   const [fieldsmodalData, setFieldsmodalData] = useState<ToDo | newToDo>();
   const [filter, setFilter] = useState({ prefix: "", tags: [] as string[] });
+  const queryClient = useQueryClient();
 
   const openFieldsModal = (todo?: ToDo) => {
     setFieldsmodalData(todo || { fields: { Tags: [], Text: "", Status: 'Todo' } });
@@ -29,9 +31,11 @@ export const AppProvider = ({
     setFieldsmodalData(undefined);
   };
 
+  
+
   useEffect(() => {
     api.setApiKey(apiKey);
-    // TODO: fetch Todos
+    queryClient.invalidateQueries('todos');
   }, [apiKey]);
 
   const state: AppContextValue = {

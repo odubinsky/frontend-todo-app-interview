@@ -19,7 +19,7 @@ export const useGetTodos = () => {
     return todos.filter((todo) => {
       const { Text, Tags } = todo.fields;
       const textMatch = Text.toLowerCase().startsWith(filter.prefix.toLowerCase());
-      const tagsMatch = Tags.some((tag) => filter.tags.includes(tag));
+      const tagsMatch = Tags.some((tag) => filter.tags.includes(tag)) || filter.tags.length === 0;
       return textMatch && tagsMatch;
     });
   };

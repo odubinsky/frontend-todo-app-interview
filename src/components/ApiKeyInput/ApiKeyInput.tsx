@@ -18,24 +18,6 @@ export const ApiKeyInput = ({}) => {
     }
   }, []);
 
-  // useEffect(() => {
-  //   async function callTodosApi() {
-  //     const response = await fetch("http://zyh0ypgh08.execute-api.eu-west-1.amazonaws.com/prod/todos", {
-  //       headers: {
-  //         "X-Api-Key": apiKey,
-  //       },
-  //     });
-  //     return await response.json();
-  //   }
-  //   if (apiKey) {
-  //     callTodosApi()
-  //       .then((res) => {
-  //         setTodos(res.records);
-  //       })
-  //       .catch((e) => console.error(e));
-  //   }
-  // }, [apiKey]);
-
   return (
     <div className={s.apiKeyInputContainer}>
       <span className={s.apiKeyLabel}>Enter API key: </span>
